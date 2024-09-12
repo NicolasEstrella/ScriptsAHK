@@ -34,7 +34,16 @@ F3::
     If (!suspendido)
     {
         Run("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Riot Games\League of Legends.lnk")
-        Sleep(15000)
+        Loop
+        { 
+            colorA := PixelGetColor(200, 515)
+            colorB := PixelGetColor(200, 620)
+            If (colorA == "0xFCFCFC" && colorB == "0xF5F5F5")
+            {
+                break
+            }
+        }
+        Sleep(200)
         Send(user)
         Sleep(250)
         Send("{Tab}")
@@ -47,22 +56,31 @@ F3::
         Sleep(7000)
         WinMaximize("Discord")
         Sleep(100)
-        Click(34, 50)
+        Click(35, 65)
         Sleep(100)
+        ;Loop
+        ;{ 
+        ;    colorA := PixelGetColor(35, 65)
+        ;    If (colorA == "0xF26558")
+        ;    {
+        ;        break
+        ;    }
+        ;}
         i := 0
         While(i < 14)
         {
             Send("^{Tab}")
-            Sleep(300)
+            Sleep(400)
             i++
         }
         i := 0
         While(i < 3)
         {
-            Send("{Tab}")
             Sleep(300)
+            Send("{Tab}")
             i++
         }
+        Sleep(300)
         Send("{Enter}")
     }
 }
