@@ -1,5 +1,3 @@
-; Win+R --> taskschd.msc --> a tarefa de inicialização ta la dentro
-
 #Requires AutoHotkey v2
 global suspendido := True
 global user := "Nikkolau23"
