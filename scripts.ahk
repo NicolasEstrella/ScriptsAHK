@@ -1,7 +1,10 @@
 #Requires AutoHotkey v2
 global suspendido := True
-global user := "Nikkolau23"
-global senha := "estrella123"
+envUserPath := "C:\Users\nicol\Desktop\git AHK\ScriptsAHK\user.env"
+envPasswordPath := "C:\Users\nicol\Desktop\git AHK\ScriptsAHK\password.env"
+
+global user := FileRead(envUserPath)
+global senha := FileRead(envPasswordPath)
 
 ; Liga/Desliga as HotKeys
 F1::{
@@ -33,6 +36,52 @@ F3::
 {
     If (!suspendido)
     {
+        Run("C:\Users\nicol\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk")
+        Sleep(100)
+        Loop
+        { 
+            try
+            {
+                WinMaximize("Discord")
+                Sleep(100)
+                colorA := PixelGetColor(35, 65)
+                ;MsgBox(colorA)
+                If (colorA == "0x5865F2" || colorA == "0x313338")
+                {
+                    ;MsgBox("entrou no if de cor antes do click")
+                    Click(35, 65)
+                    Sleep(100)
+                }
+                colorA := PixelGetColor(35, 65)
+                ;MsgBox(colorA)
+                If (colorA == "0x5865F2")
+                {
+                    ;MsgBox("entrou no if de cor depois do click")
+                    break
+                }
+            }
+            catch as e 
+            {
+                continue 
+            }
+        }
+        i := 0
+        While(i < 14)
+        {
+            Send("^{Tab}")
+            Sleep(400)
+            i++
+        }
+        i := 0
+        While(i < 3)
+        {
+            Sleep(300)
+            Send("{Tab}")
+            i++
+        }
+        Sleep(300)
+        Send("{Enter}")
+        Sleep(100)
         Run("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Riot Games\League of Legends.lnk")
         Loop
         { 
@@ -50,37 +99,6 @@ F3::
         Sleep(250)
         Send(senha)
         Sleep(250)
-        Send("{Enter}")
-        Sleep(250)
-        Run("C:\Users\nicol\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk")
-        Sleep(7000)
-        WinMaximize("Discord")
-        Sleep(100)
-        Click(35, 65)
-        Sleep(100)
-        ;Loop
-        ;{ 
-        ;    colorA := PixelGetColor(35, 65)
-        ;    If (colorA == "0xF26558")
-        ;    {
-        ;        break
-        ;    }
-        ;}
-        i := 0
-        While(i < 14)
-        {
-            Send("^{Tab}")
-            Sleep(400)
-            i++
-        }
-        i := 0
-        While(i < 3)
-        {
-            Sleep(300)
-            Send("{Tab}")
-            i++
-        }
-        Sleep(300)
         Send("{Enter}")
     }
 }
