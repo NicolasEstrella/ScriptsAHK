@@ -1,0 +1,1 @@
+to fazendo alguns scripts pro meu pc aqui, se algm quiser fazer scripts pro próprio computador e tbm ficar compartilhando nesse repositório, é só criar uma branch com o seu nome ("Nicolas-scripts-AHK") ou algo asim
