@@ -1,10 +1,37 @@
 #Requires AutoHotkey v2
-global suspendido := True
-envUserPath := "C:\Users\nicol\Desktop\git AHK\ScriptsAHK\user.env"
-envPasswordPath := "C:\Users\nicol\Desktop\git AHK\ScriptsAHK\password.env"
 
-global user := FileRead(envUserPath)
-global senha := FileRead(envPasswordPath)
+global envFilePath := A_ScriptDir . "\.env"
+
+global envVars := ReadEnvFile()
+global user := envVars["LeagueUser"]
+global senha := envVars["LeaguePassword"]
+
+ReadEnvFile()
+{
+    envVars := Map()
+    content := FileRead(envFilePath)
+    for line in StrSplit(content, "`n")
+    {
+        if(line ~= "^\*#") ;ignora linha de comentário
+        {
+            continue 
+        }
+        if(line ~= "^\*#") ;ignora linha vazia
+        {
+            continue
+        }
+        parts := StrSplit(line, "=")
+        if(parts.Length == 2)
+        {
+            key := Trim(parts[1])
+            content := Trim(parts[2])
+            envVars[key] := content
+        }
+    }
+    return envVars
+}
+
+global suspendido := True
 
 ; Liga/Desliga as HotKeys
 F1::{
