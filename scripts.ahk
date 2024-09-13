@@ -12,11 +12,11 @@ ReadEnvFile()
     content := FileRead(envFilePath)
     for line in StrSplit(content, "`n")
     {
-        if(line ~= "^\*#") ;ignora linha de comentário
+        if(line ~= "^\*#") ; ignora linha de comentário
         {
             continue 
         }
-        if(line ~= "^\*#") ;ignora linha vazia
+        if(line ~= "^\*#") ; ignora linha vazia
         {
             continue
         }
@@ -35,7 +35,7 @@ global suspendido := True
 
 ; Liga/Desliga as HotKeys
 F1::{
-    global suspendido := !suspendido ; The Pause/Break key.
+    global suspendido := !suspendido 
     If (suspendido)
     {
         MsgBox("As HotKeys estão suspensas")
@@ -58,7 +58,7 @@ F2::
         Send("{Enter}")
     }
 }
-;Código para abrir o lol, logar nele, abrir o discord e entrar na call do server do korus
+; Abre o lol, loga nele, abre o discord e entra na call do server do korus
 F3::
 {
     If (!suspendido)
@@ -72,18 +72,14 @@ F3::
                 WinMaximize("Discord")
                 Sleep(100)
                 colorA := PixelGetColor(35, 65)
-                ;MsgBox(colorA)
-                If (colorA == "0x5865F2" || colorA == "0x313338")
+                If (colorA == "0x5865F2" || colorA == "0x313338") ; Verifica se o discord abriu
                 {
-                    ;MsgBox("entrou no if de cor antes do click")
                     Click(35, 65)
                     Sleep(100)
                 }
                 colorA := PixelGetColor(35, 65)
-                ;MsgBox(colorA)
-                If (colorA == "0x5865F2")
+                If (colorA == "0x5865F2") ; Verifica se o primeiro ícone do discord no canto superior esquerdo já foi clicado e quebra o loop pra dar sequência no código
                 {
-                    ;MsgBox("entrou no if de cor depois do click")
                     break
                 }
             }
@@ -93,14 +89,14 @@ F3::
             }
         }
         i := 0
-        While(i < 14)
+        While(i < 14) ; Ctrl + Tab na quantidade de vezes necessárias para chegar no servidor escolhido
         {
             Send("^{Tab}")
             Sleep(400)
             i++
         }
         i := 0
-        While(i < 3)
+        While(i < 3) ; Tab na quantidade de vezes necessárias para chegar no canal de voz/texto desejado
         {
             Sleep(300)
             Send("{Tab}")
@@ -114,7 +110,7 @@ F3::
         { 
             colorA := PixelGetColor(200, 515)
             colorB := PixelGetColor(200, 620)
-            If (colorA == "0xFCFCFC" && colorB == "0xF5F5F5")
+            If (colorA == "0xFCFCFC" && colorB == "0xF5F5F5") ; Verifica se o client do lol já ta aberto e se já da pra logar na conta
             {
                 break
             }
